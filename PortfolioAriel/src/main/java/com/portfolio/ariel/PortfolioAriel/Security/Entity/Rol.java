@@ -1,0 +1,45 @@
+package com.portfolio.ariel.PortfolioAriel.Security.Entity;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import com.portfolio.ariel.PortfolioAriel.Security.Enums.RolNombre;
+
+@Entity
+public class Rol {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private RolNombre rolnombre;
+	
+	//constructores
+	public Rol() {
+		
+	}
+	public Rol(int id, @NotNull RolNombre rolnombre) {
+		this.rolnombre = rolnombre;
+	}
+	//Getters/Setters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public RolNombre getRolnombre() {
+		return rolnombre;
+	}
+	public void setRolnombre(RolNombre rolnombre) {
+		this.rolnombre = rolnombre;
+	}
+	
+	
+
+}
