@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 //Clase encargada de tener la seguridad implementa UserDetails
+@SuppressWarnings("serial")
 public class UsuarioPrincipal implements UserDetails{
 	
 	private String nombre;
