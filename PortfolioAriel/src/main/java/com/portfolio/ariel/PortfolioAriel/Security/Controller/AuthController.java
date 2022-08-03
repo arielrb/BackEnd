@@ -47,7 +47,8 @@ public class AuthController {
 	// Creo el usuario
 
 	@PostMapping("/nuevo")
-	public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindResult) {
+	public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindResult) 
+	{
 
 		if (bindResult.hasErrors()) {
 			return new ResponseEntity(new Mensaje("Campos incorrectos o email invalido"), HttpStatus.BAD_REQUEST);
@@ -71,10 +72,12 @@ public class AuthController {
 
 			return new ResponseEntity(new Mensaje("Usuario guardado!"), HttpStatus.CREATED);
 		}
+	}
 		//Login
 		@PostMapping("/login")
-	    public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult)
+		public ResponseEntity<JwtDTO> login(@RequestBody @Valid LoginUsuario loginUsuario, BindingResult bindingResult)
 		{
+		
 			
 			if(bindingResult.hasErrors()) {
 				return new ResponseEntity(new Mensaje("Campos incorrectos!"),HttpStatus.BAD_REQUEST);
