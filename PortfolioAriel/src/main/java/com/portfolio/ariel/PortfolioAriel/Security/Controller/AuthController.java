@@ -69,9 +69,10 @@ public class AuthController {
 			roles.add(rolServ.getByRolNombre(RolNombre.ROLE_ADMIN).get());
 			usuario.setRoles(roles);
 			usuarioServ.save(usuario);
+		}
 
 			return new ResponseEntity(new Mensaje("Usuario guardado!"), HttpStatus.CREATED);
-		}
+		
 	}
 		//Login
 		@PostMapping("/login")
@@ -99,4 +100,4 @@ public class AuthController {
 			
 		}
 	}
-}
+
