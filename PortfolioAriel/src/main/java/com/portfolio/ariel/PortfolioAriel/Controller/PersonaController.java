@@ -1,5 +1,6 @@
 package com.portfolio.ariel.PortfolioAriel.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class PersonaController {
 		return ipersonaService.getPersona();
 	}
 	//Para enivar la info y guardarla en la BBDD
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/personas/crear")
 	//El parámetro va a ser un paquete de info que va con la anotation RequestBody
 	public String createPersona(@RequestBody Persona persona) {
@@ -31,6 +33,7 @@ public class PersonaController {
 		return "Persona creada correctamente";
 	}
 	//Para borrar
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("personas/borrar/{id}")
 	//El parametro es la id, es variable, entonces va la anotation PathVariable
 	public String deletePersona(@PathVariable Long id) {
@@ -38,6 +41,7 @@ public class PersonaController {
 		return "La persona {{id}} se elimino correctamente";
 	}
 	//Para edicion/actualizacion
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/personas/editar/{id}")
 	//En este caso pathvariable es el id que ubicamos y request param es lo que vamos a editar
 	public Persona editarPersona(@PathVariable Long id, 

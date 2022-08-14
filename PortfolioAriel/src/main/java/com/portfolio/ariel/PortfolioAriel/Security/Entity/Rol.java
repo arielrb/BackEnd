@@ -13,7 +13,7 @@ import com.portfolio.ariel.PortfolioAriel.Security.Enums.RolNombre;
 @Entity
 public class Rol {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotNull
 	@Enumerated(EnumType.STRING)
