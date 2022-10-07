@@ -64,8 +64,7 @@ public class Ceducacion {
 			return new ResponseEntity(new Mensaje("Ese id no existe!"), HttpStatus.BAD_REQUEST);
 		}
 		// Compara nombres de Habilidades
-		if (Sedu.ExistByNombre(dtoEdu.getNombre())
-				&& Sedu.GetByNombre(dtoEdu.getNombre()).get().getId() != id) {
+		if (Sedu.ExistByNombre(dtoEdu.getNombre()) && Sedu.GetByNombre(dtoEdu.getNombre()).get().getId() != id) {
 			return new ResponseEntity(new Mensaje("La educacion con ese nombre ya existe!"), HttpStatus.BAD_REQUEST);
 		}
 		if (StringUtils.isBlank(dtoEdu.getNombre())) {
@@ -84,19 +83,19 @@ public class Ceducacion {
 		if (!Sedu.ExistById(id)) {
 			return new ResponseEntity(new Mensaje("No existe esa Educacion!"), HttpStatus.NOT_FOUND);
 		}
-		Habilidades habilidad = Sedu.GetOne(id).get();
-		return new ResponseEntity(habilidad, HttpStatus.OK);
+		Educacion educacion = Sedu.GetOne(id).get();
+		return new ResponseEntity(educacion, HttpStatus.OK);
 	}
 
-	// Eliminar una experiencias
+	// Eliminar una experiencia
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) {
-		if (!Shab.ExistById(id)) {
-			return new ResponseEntity(new Mensaje("No existe esa Habilidad!"), HttpStatus.NOT_FOUND);
+		if (!Sedu.ExistById(id)) {
+			return new ResponseEntity(new Mensaje("No existe esa educacion que me decis!"), HttpStatus.NOT_FOUND);
 		}
 
-		Shab.delete(id);
-		return new ResponseEntity(new Mensaje("Habilidad eliminada!"), HttpStatus.OK);
+		Sedu.delete(id);
+		return new ResponseEntity(new Mensaje("Educacion eliminada!"), HttpStatus.OK);
 	}
 
 }
