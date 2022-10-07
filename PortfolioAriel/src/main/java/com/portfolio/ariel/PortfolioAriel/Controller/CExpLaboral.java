@@ -21,7 +21,7 @@ import com.portfolio.ariel.PortfolioAriel.Service.SExpLaboral;
 import org.apache.commons.lang3.StringUtils;
 
 @RestController
-@RequestMapping("ExperienciaLaboral")
+@RequestMapping("/ExperienciaLaboral")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CExpLaboral {
 	@Autowired
