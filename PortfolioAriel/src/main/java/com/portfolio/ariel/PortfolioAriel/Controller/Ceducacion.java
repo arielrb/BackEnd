@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.portfolio.ariel.PortfolioAriel.Dto.DtoEducacion;
-import com.portfolio.ariel.PortfolioAriel.Dto.DtoHabilidades;
 import com.portfolio.ariel.PortfolioAriel.Entity.Educacion;
-import com.portfolio.ariel.PortfolioAriel.Entity.Habilidades;
-import com.portfolio.ariel.PortfolioAriel.Repository.IEducacion;
 import com.portfolio.ariel.PortfolioAriel.Security.Controller.Mensaje;
 import com.portfolio.ariel.PortfolioAriel.Service.SEducacion;
 

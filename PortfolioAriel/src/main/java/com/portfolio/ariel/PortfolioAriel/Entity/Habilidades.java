@@ -1,22 +1,24 @@
 package com.portfolio.ariel.PortfolioAriel.Entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Habilidades {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nombreHabilidad;
+	private String nombre;
 	private int porcentaje;
 	//Constructor
 
 	public Habilidades() {
 		
 	}
-	public Habilidades(String nombreHabilidad, int porcentaje) {
-		this.nombreHabilidad = nombreHabilidad;
+	public Habilidades(String nombre, int porcentaje) {
+		this.nombre = nombre;
 		this.porcentaje = porcentaje;
 	}
 	
@@ -28,11 +30,11 @@ public class Habilidades {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNombreHabilidad() {
-		return nombreHabilidad;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombreHabilidad(String nombreHabilidad) {
-		this.nombreHabilidad = nombreHabilidad;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public int getPorcentaje() {
 		return porcentaje;

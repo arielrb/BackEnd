@@ -8,6 +8,7 @@ import com.portfolio.ariel.PortfolioAriel.Entity.ExpLaboral;
 
 @Repository
 public interface IExpLaboralRepository extends JpaRepository<ExpLaboral, Integer>{
+	
 	public Optional<ExpLaboral> findByNombreExp(String nombreExp);
 	public boolean existsByNombreExp(String nombreExp);
 	

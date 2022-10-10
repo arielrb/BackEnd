@@ -24,7 +24,7 @@ public class SProyectos {
 		return Rpro.findById(id);
 	}
 	public Optional<Proyectos> GetByNombre(String nombre){
-		return Rpro.FindByNombre(nombre);
+		return Rpro.findByNombre(nombre);
 	}
 	public void save(Proyectos proyecto) {
 		Rpro.save(proyecto);
@@ -36,7 +36,7 @@ public class SProyectos {
 		return Rpro.existsById(id);
 	}
 	public boolean ExistByNombre(String nombre) {
-		return Rpro.ExistByNombre(nombre);
+		return Rpro.existsByNombre(nombre);
 	}
 
 

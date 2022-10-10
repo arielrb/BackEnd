@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.portfolio.ariel.PortfolioAriel.Entity.Habilidades;
 
 @Repository
-public interface IHabilidadesRepository extends JpaRepository<Habilidades, Integer>{
+public interface IHabilidadesRepository extends JpaRepository<Habilidades, Integer> {
 
-	Optional<Habilidades> findByNombre(String nombre);
-		public boolean existsByNombre(String nombre);
-	
+	public Optional<Habilidades> findByNombre(String nombre);
+	public boolean existsByNombre(String nombre);
+
 }

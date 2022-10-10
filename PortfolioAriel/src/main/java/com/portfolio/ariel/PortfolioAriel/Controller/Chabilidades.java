@@ -3,6 +3,7 @@ package com.portfolio.ariel.PortfolioAriel.Controller;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,14 +40,14 @@ public class Chabilidades {
 	// Crear experiencias
 	@PostMapping("/crear")
 	public ResponseEntity<?> create(@RequestBody DtoHabilidades dtoHab) {
-		if (StringUtils.isBlank(dtoHab.getNombreHabilidad())) {
+		if (StringUtils.isBlank(dtoHab.getNombre())) {
 			return new ResponseEntity(new Mensaje("Nombre obligatorio!"), HttpStatus.BAD_REQUEST);
 		}
-		if (Shab.ExistByNombre(dtoHab.getNombreHabilidad())) {
+		if (Shab.ExistByNombre(dtoHab.getNombre())) {
 			return new ResponseEntity(new Mensaje("Esa Habilidad ya existia!"), HttpStatus.BAD_REQUEST);
 		}
 
-		Habilidades habilidad= new Habilidades( dtoHab.getNombreHabilidad(), dtoHab.getPorcentaje());
+		Habilidades habilidad= new Habilidades( dtoHab.getNombre(), dtoHab.getPorcentaje());
 
 		Shab.save(habilidad);
 
@@ -61,15 +62,19 @@ public class Chabilidades {
 			return new ResponseEntity(new Mensaje("Ese id no existe!"), HttpStatus.BAD_REQUEST);
 		}
 		// Compara nombres de Habilidades
-		if (Shab.ExistByNombre(dtoHab.getNombreHabilidad())
-				&& Shab.GetByNombre(dtoHab.getNombreHabilidad()).get().getId() != id) {
+		if (Shab.ExistByNombre(dtoHab.getNombre())
+				&& Shab.GetByNombre(dtoHab.getNombre()).get().getId() != id) {
 			return new ResponseEntity(new Mensaje("La habilidad con ese nombre ya existe!"), HttpStatus.BAD_REQUEST);
 		}
-		if (StringUtils.isBlank(dtoHab.getNombreHabilidad())) {
+		if (StringUtils.isBlank(dtoHab.getNombre())) {
 			return new ResponseEntity(new Mensaje("El nombre es obligatorio!"), HttpStatus.BAD_REQUEST);
 		}
+		/* A hacer, tengo que ver la forma de verificar si el campo esta vacio
+		if ( dtoHab.getPorcentaje().isEmpty()) {
+			return new ResponseEntity(new Mensaje("El Porcentaje es obligatorio!"), HttpStatus.BAD_REQUEST);
+		} */
 		Habilidades habilidad= Shab.GetOne(id).get();
-		habilidad.setNombreHabilidad(dtoHab.getNombreHabilidad());
+		habilidad.setNombre(dtoHab.getNombre());
 		habilidad.setPorcentaje(dtoHab.getPorcentaje());
 		Shab.save(habilidad);
 		return new ResponseEntity(new Mensaje("Habilidad Actualizada, master!"), HttpStatus.OK);

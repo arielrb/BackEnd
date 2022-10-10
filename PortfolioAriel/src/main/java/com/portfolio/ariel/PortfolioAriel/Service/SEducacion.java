@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.portfolio.ariel.PortfolioAriel.Entity.Educacion;
-import com.portfolio.ariel.PortfolioAriel.Entity.Habilidades;
 import com.portfolio.ariel.PortfolioAriel.Repository.IEducacion;
-import com.portfolio.ariel.PortfolioAriel.Repository.IHabilidadesRepository;
 
 @Transactional
 @Service
@@ -26,7 +24,7 @@ public class SEducacion {
 		return Redu.findById(id);
 	}
 	public Optional<Educacion> GetByNombre(String nombre){
-		return Redu.FindByNombre(nombre);
+		return Redu.findByNombre(nombre);
 	}
 	public void save(Educacion educacion) {
 		Redu.save(educacion);
@@ -38,7 +36,7 @@ public class SEducacion {
 		return Redu.existsById(id);
 	}
 	public boolean ExistByNombre(String nombre) {
-		return Redu.ExistByNombre(nombre);
+		return Redu.existsByNombre(nombre);
 	}
 
 }

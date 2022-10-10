@@ -8,7 +8,7 @@ import com.portfolio.ariel.PortfolioAriel.Entity.Proyectos;
 @Repository
 public interface IProyectos extends JpaRepository<Proyectos, Integer>{
 	
-	public Optional<Proyectos> FindByNombre(String nombre);
-	public boolean ExistByNombre(String nombre);
+	public Optional<Proyectos> findByNombre(String nombre);
+	public boolean existsByNombre(String nombre);
 
 }
