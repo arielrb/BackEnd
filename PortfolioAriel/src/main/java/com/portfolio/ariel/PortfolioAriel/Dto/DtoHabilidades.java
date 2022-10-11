@@ -9,10 +9,13 @@ public class DtoHabilidades {
 	@NotBlank
 	private int porcentaje;
 	
+	private String img;
+
 	//Constructores
-	public DtoHabilidades(@NotBlank String nombre, @NotBlank int porcentaje) {
+	public DtoHabilidades(@NotBlank String nombre, @NotBlank int porcentaje, String img) {
 		this.nombre = nombre;
 		this.porcentaje = porcentaje;
+		this.img = img;
 	}
 	public DtoHabilidades() {
 		
@@ -29,6 +32,12 @@ public class DtoHabilidades {
 	}
 	public void setPorcentaje(int porcentaje) {
 		this.porcentaje = porcentaje;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 

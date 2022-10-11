@@ -2,35 +2,44 @@ package com.portfolio.ariel.PortfolioAriel.Dto;
 
 import javax.validation.constraints.NotBlank;
 
-public class DtoProyectos {
-
-
+public class DtoPersona {
+	
 	@NotBlank
 	private String nombre;
+	@NotBlank
+	private String apellido;
 	@NotBlank
 	private String descripcion;
 	
 	private String img;
-
 	//Constructores
-	public DtoProyectos() {
+	
+	public DtoPersona() {
 		
 	}
 	
-	public DtoProyectos(String nombre, String descripcion, String img) {
-		super();
+	public DtoPersona(String nombre, String apellido, String descripcion, String img) {
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.descripcion = descripcion;
 		this.img = img;
 	}
 
-	//Get/Set
+	//Gett/Sett
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getDescripcion() {
@@ -48,5 +57,6 @@ public class DtoProyectos {
 	public void setImg(String img) {
 		this.img = img;
 	}
+
 	
 }

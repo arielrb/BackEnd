@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Persona {
@@ -18,24 +17,29 @@ public class Persona {
 	private Long id;
 	@NotNull
 	@Column(name = "Nombre")
-	@Size(min = 1,max = 50,message = "Longitud invalida")
 	private String nombre;
 	@NotNull
-	@Size(min = 1,max = 50,message = "Longitud invalida")
 	@Column(name = "Apellido")
 	private String apellido;
 	@Lob
 	@Column(name = "Imagen")
 	private String  img;
 
-	public Long getId() {
-		return id;
+	@Column(name = "descripcion")
+	private String descripcion;
+
+	public Persona() {
+		
+	}
+	
+	public Persona(@NotNull String nombre, @NotNull String apellido, String img, String descripcion) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.img = img;
+		this.descripcion = descripcion;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -58,6 +62,22 @@ public class Persona {
 	
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

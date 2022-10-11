@@ -48,7 +48,7 @@ public class Cproyectos {
 			return new ResponseEntity(new Mensaje("Esa ya existia!"), HttpStatus.BAD_REQUEST);
 		}
 
-		Proyectos proyecto = new Proyectos(dtoPro.getNombre(), dtoPro.getDescripcion());
+		Proyectos proyecto = new Proyectos(dtoPro.getNombre(), dtoPro.getDescripcion(), dtoPro.getImg());
 
 		Spro.save(proyecto);
 
@@ -72,6 +72,7 @@ public class Cproyectos {
 		Proyectos proyecto = Spro.GetOne(id).get();
 		proyecto.setNombre(dtoPro.getNombre());
 		proyecto.setDescripcion(dtoPro.getDescripcion());
+		proyecto.setImg(dtoPro.getImg());
 		Spro.save(proyecto);
 		return new ResponseEntity(new Mensaje("Proyecto Actualizado, Zaplaaaaa!"), HttpStatus.OK);
 	}

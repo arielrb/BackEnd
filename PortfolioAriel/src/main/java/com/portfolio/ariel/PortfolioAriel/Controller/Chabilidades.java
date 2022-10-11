@@ -47,7 +47,7 @@ public class Chabilidades {
 			return new ResponseEntity(new Mensaje("Esa Habilidad ya existia!"), HttpStatus.BAD_REQUEST);
 		}
 
-		Habilidades habilidad= new Habilidades( dtoHab.getNombre(), dtoHab.getPorcentaje());
+		Habilidades habilidad= new Habilidades( dtoHab.getNombre(), dtoHab.getPorcentaje(), dtoHab.getImg());
 
 		Shab.save(habilidad);
 

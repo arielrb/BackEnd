@@ -9,15 +9,18 @@ public class DtoEducacion {
 	@NotBlank
 	private String descripcion;
 	
+	private String img;
+
 	//Constructores
 	public DtoEducacion() {
 		
 	}
 	
-	public DtoEducacion(String nombre, String descripcion) {
+	public DtoEducacion(String nombre, String descripcion, String img) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.img = img;
 	}
 
 	//Get/Set
@@ -35,6 +38,14 @@ public class DtoEducacion {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	

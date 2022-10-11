@@ -12,15 +12,17 @@ public class Proyectos {
 	private int id;
 	private String nombre;
 	private String descripcion;
+	private String img;
 
 	//Constructores
 	public Proyectos() {
 	}
 
-	public Proyectos(String nombre, String descripcion) {
+	public Proyectos(String nombre, String descripcion, String  img) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.img = img;
 	}
 
 	// Get/Set
@@ -46,5 +48,13 @@ public class Proyectos {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

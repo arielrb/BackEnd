@@ -46,7 +46,7 @@ public class Ceducacion {
 			return new ResponseEntity(new Mensaje("Esa ya existia!"), HttpStatus.BAD_REQUEST);
 		}
 
-		Educacion educacion = new Educacion(dtoEdu.getNombre(), dtoEdu.getDescripcion());
+		Educacion educacion = new Educacion(dtoEdu.getNombre(), dtoEdu.getDescripcion(), dtoEdu.getImg());
 
 		Sedu.save(educacion);
 
@@ -70,6 +70,7 @@ public class Ceducacion {
 		Educacion educacion = Sedu.GetOne(id).get();
 		educacion.setNombre(dtoEdu.getNombre());
 		educacion.setDescripcion(dtoEdu.getDescripcion());
+		educacion.setImg(dtoEdu.getImg());
 		Sedu.save(educacion);
 		return new ResponseEntity(new Mensaje("Educacion Actualizada, crack!"), HttpStatus.OK);
 	}

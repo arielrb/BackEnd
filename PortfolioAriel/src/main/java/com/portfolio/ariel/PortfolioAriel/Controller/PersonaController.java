@@ -1,68 +1,100 @@
 package com.portfolio.ariel.PortfolioAriel.Controller;
+
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-import com.portfolio.ariel.PortfolioAriel.Interface.IPersonaService;
-import com.portfolio.ariel.PortfolioAriel.Entity.*;
+
+import com.portfolio.ariel.PortfolioAriel.Dto.DtoPersona;
+import com.portfolio.ariel.PortfolioAriel.Entity.Persona;
+import com.portfolio.ariel.PortfolioAriel.Security.Controller.Mensaje;
+import com.portfolio.ariel.PortfolioAriel.Service.SPersona;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/MiPersona")
 public class PersonaController {
-	//Como el controller llama al servicio, hacemos el autowired al servicio
-	@Autowired IPersonaService ipersonaService;
-	//Defino el metodo del controlador que llama al servicio
-	//Ademas defino la Anotation para el metodo para la URL 
-	@GetMapping("/personas/traer")
-	public List<Persona> getPersona(){
-		return ipersonaService.getPersona();
+
+	@Autowired
+	SPersona Sper;
+
+	// Traer la lista
+	@GetMapping("/lista")
+	public ResponseEntity<List<Persona>> list() {
+		List<Persona> list = Sper.list();
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
-	//Para enivar la info y guardarla en la BBDD
-	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/personas/crear")
-	//El parámetro va a ser un paquete de info que va con la anotation RequestBody
-	public String createPersona(@RequestBody Persona persona) {
-		ipersonaService.savePersona(persona);
-		return "Persona creada correctamente";
-	}
-	//Para borrar
-	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("personas/borrar/{id}")
-	//El parametro es la id, es variable, entonces va la anotation PathVariable
-	public String deletePersona(@PathVariable Long id) {
-		ipersonaService.deletePersona(id);
-		return "La persona {{id}} se elimino correctamente";
-	}
-	//Para edicion/actualizacion
-	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping("/personas/editar/{id}")
-	//En este caso pathvariable es el id que ubicamos y request param es lo que vamos a editar
-	public Persona editarPersona(@PathVariable Long id, 
-		@RequestParam("nombre") String nuevonombre,
-		@RequestParam("apellido") String nuevoapellido,
-		@RequestParam("img") String nuevaimg) {
-		//Instancio el objeto que quiero editar
-		Persona persona = ipersonaService.findPersona(id);
-		//modifico sus atributos
-		persona.setNombre(nuevonombre);
-		persona.setApellido(nuevoapellido);
-		persona.setImg(nuevaimg);
-		//Lo guardo
-		ipersonaService.savePersona(persona);
-		
-		//Y devuelvo la persona
-		return persona;
-	}
+
 	
-	@GetMapping("personas/traer/perfil")
-	public Persona encontrarPersona() {
-		return 	ipersonaService.findPersona((long)1);
+	// Actualizar experiencias
+	@PutMapping("update/{id}")
+	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody DtoPersona dtoPer) {
+		// Validar por id
+		if (!Sper.ExistById(id)) {
+			return new ResponseEntity(new Mensaje("Ese id no existe!"), HttpStatus.BAD_REQUEST);
+		}
+		if (StringUtils.isBlank(dtoPer.getNombre())) {
+			return new ResponseEntity(new Mensaje("El nombre es obligatorio!"), HttpStatus.BAD_REQUEST);
+		}
+		if (StringUtils.isBlank(dtoPer.getDescripcion())) {
+			return new ResponseEntity(new Mensaje("La descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
+		}
+		if (StringUtils.isBlank(dtoPer.getApellido())) {
+			return new ResponseEntity(new Mensaje("El apellido es obligatorio!"), HttpStatus.BAD_REQUEST);
+		}
+		Persona perso = Sper.GetOne(id).get();
+		perso.setNombre(dtoPer.getNombre());
+		perso.setDescripcion(dtoPer.getDescripcion());
+		perso.setApellido(dtoPer.getApellido());
+		perso.setImg(dtoPer.getImg());
+		Sper.save(perso);
+		return new ResponseEntity(new Mensaje("Ahi va, informacion actualizada!"), HttpStatus.OK);
 	}
+
+	// Encontrar por Id
+	@GetMapping("/detail/{id}")
+	public ResponseEntity<Persona> getById(@PathVariable("id") long id) {
+		if (!Sper.ExistById(id)) {
+			return new ResponseEntity(new Mensaje("No existe esa Persona!"), HttpStatus.NOT_FOUND);
+		}
+		Persona perso= Sper.GetOne(id).get();
+		return new ResponseEntity(perso, HttpStatus.OK);
+	}
+
+	/* Comento creacion y edicion debido a que ya cree la persona en la BBDD, solo voy a querer editarlo
+	// Crear experiencias
+	@PostMapping("/crear")
+	public ResponseEntity<?> create(@RequestBody DtoEducacion dtoEdu) {
+		if (StringUtils.isBlank(dtoEdu.getNombre())) {
+			return new ResponseEntity(new Mensaje("Nombre obligatorio!"), HttpStatus.BAD_REQUEST);
+		}
+		if (Sedu.ExistByNombre(dtoEdu.getNombre())) {
+			return new ResponseEntity(new Mensaje("Esa ya existia!"), HttpStatus.BAD_REQUEST);
+		}
+
+		Educacion educacion = new Educacion(dtoEdu.getNombre(), dtoEdu.getDescripcion());
+
+		Sedu.save(educacion);
+
+		return new ResponseEntity(new Mensaje("Educacion agregada, que nivel!"), HttpStatus.OK);
+	}
+		// Eliminar una experiencia
+	@DeleteMapping("/eliminar/{id}")
+	public ResponseEntity<?> delete(@PathVariable("id") int id) {
+		if (!Sedu.ExistById(id)) {
+			return new ResponseEntity(new Mensaje("No existe esa educacion que me decis!"), HttpStatus.NOT_FOUND);
+		}
+
+		Sedu.delete(id);
+		return new ResponseEntity(new Mensaje("Educacion eliminada!"), HttpStatus.OK);
+	}
+*/
 }

@@ -11,6 +11,7 @@ public class ExpLaboral {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nombreExp;
+	private String  img;
 	private String descripcionExp;
 	
 	//Constructores
@@ -18,9 +19,10 @@ public class ExpLaboral {
 		
 	}
 
-	public ExpLaboral(String nombreExp, String descripcionExp) {
+	public ExpLaboral(String nombreExp, String descripcionExp, String  img) {
 		this.nombreExp = nombreExp;
 		this.descripcionExp = descripcionExp;
+		this.img = img;
 	}
 	//Gett/SETT
 
@@ -46,6 +48,14 @@ public class ExpLaboral {
 
 	public void setDescripcionExp(String descripcionExp) {
 		this.descripcionExp = descripcionExp;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 }

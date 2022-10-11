@@ -43,7 +43,7 @@ public class CExpLaboral {
 			return new ResponseEntity(new Mensaje("Esa experiencia ya existia!"),HttpStatus.BAD_REQUEST);
 		}
 		
-		ExpLaboral expLab = new ExpLaboral(dtoExp.getNombreExp(),dtoExp.getDescripcionExp());
+		ExpLaboral expLab = new ExpLaboral(dtoExp.getNombreExp(),dtoExp.getDescripcionExp(), dtoExp.getImg());
 		
 		sExp.save(expLab);
 		
@@ -67,6 +67,7 @@ public class CExpLaboral {
 		ExpLaboral expLab = sExp.getOne(id).get();
 		expLab.setNombreExp(dtoExp.getNombreExp());
 		expLab.setDescripcionExp(dtoExp.getDescripcionExp());
+		expLab.setImg(dtoExp.getImg());
 		sExp.save(expLab);
 		return new ResponseEntity(new Mensaje("Experiencia Actualizada!"),HttpStatus.OK);
 	}
