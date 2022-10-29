@@ -69,32 +69,4 @@ public class PersonaController {
 		return new ResponseEntity(perso, HttpStatus.OK);
 	}
 
-	/* Comento creacion y edicion debido a que ya cree la persona en la BBDD, solo voy a querer editarlo
-	// Crear experiencias
-	@PostMapping("/crear")
-	public ResponseEntity<?> create(@RequestBody DtoEducacion dtoEdu) {
-		if (StringUtils.isBlank(dtoEdu.getNombre())) {
-			return new ResponseEntity(new Mensaje("Nombre obligatorio!"), HttpStatus.BAD_REQUEST);
-		}
-		if (Sedu.ExistByNombre(dtoEdu.getNombre())) {
-			return new ResponseEntity(new Mensaje("Esa ya existia!"), HttpStatus.BAD_REQUEST);
-		}
-
-		Educacion educacion = new Educacion(dtoEdu.getNombre(), dtoEdu.getDescripcion());
-
-		Sedu.save(educacion);
-
-		return new ResponseEntity(new Mensaje("Educacion agregada, que nivel!"), HttpStatus.OK);
-	}
-		// Eliminar una experiencia
-	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") int id) {
-		if (!Sedu.ExistById(id)) {
-			return new ResponseEntity(new Mensaje("No existe esa educacion que me decis!"), HttpStatus.NOT_FOUND);
-		}
-
-		Sedu.delete(id);
-		return new ResponseEntity(new Mensaje("Educacion eliminada!"), HttpStatus.OK);
-	}
-*/
 }

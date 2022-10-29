@@ -45,6 +45,9 @@ public class Ceducacion {
 		if (Sedu.ExistByNombre(dtoEdu.getNombre())) {
 			return new ResponseEntity(new Mensaje("Esa ya existia!"), HttpStatus.BAD_REQUEST);
 		}
+		if (StringUtils.isBlank(dtoEdu.getDescripcion())) {
+			return new ResponseEntity(new Mensaje("Descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
+		}
 
 		Educacion educacion = new Educacion(dtoEdu.getNombre(), dtoEdu.getDescripcion(), dtoEdu.getImg());
 
@@ -66,6 +69,9 @@ public class Ceducacion {
 		}
 		if (StringUtils.isBlank(dtoEdu.getNombre())) {
 			return new ResponseEntity(new Mensaje("El nombre es obligatorio!"), HttpStatus.BAD_REQUEST);
+		}
+		if (StringUtils.isBlank(dtoEdu.getDescripcion())) {
+			return new ResponseEntity(new Mensaje("Descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
 		}
 		Educacion educacion = Sedu.GetOne(id).get();
 		educacion.setNombre(dtoEdu.getNombre());

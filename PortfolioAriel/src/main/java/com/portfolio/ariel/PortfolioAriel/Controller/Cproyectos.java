@@ -44,6 +44,9 @@ public class Cproyectos {
 		if (StringUtils.isBlank(dtoPro.getNombre())) {
 			return new ResponseEntity(new Mensaje("Nombre obligatorio!"), HttpStatus.BAD_REQUEST);
 		}
+		if (StringUtils.isBlank(dtoPro.getDescripcion())) {
+			return new ResponseEntity(new Mensaje("Descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
+		}
 		if (Spro.ExistByNombre(dtoPro.getNombre())) {
 			return new ResponseEntity(new Mensaje("Esa ya existia!"), HttpStatus.BAD_REQUEST);
 		}
@@ -68,6 +71,9 @@ public class Cproyectos {
 		}
 		if (StringUtils.isBlank(dtoPro.getNombre())) {
 			return new ResponseEntity(new Mensaje("El nombre es obligatorio!"), HttpStatus.BAD_REQUEST);
+		}
+		if (StringUtils.isBlank(dtoPro.getDescripcion())) {
+			return new ResponseEntity(new Mensaje("La descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
 		}
 		Proyectos proyecto = Spro.GetOne(id).get();
 		proyecto.setNombre(dtoPro.getNombre());

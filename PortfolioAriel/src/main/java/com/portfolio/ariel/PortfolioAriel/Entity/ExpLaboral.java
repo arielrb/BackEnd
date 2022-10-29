@@ -11,7 +11,7 @@ public class ExpLaboral {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nombreExp;
-	private String  img;
+	private String img;
 	private String descripcionExp;
 	
 	//Constructores

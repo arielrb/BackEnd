@@ -42,6 +42,9 @@ public class CExpLaboral {
 		if(sExp.existByNombreExp(dtoExp.getNombreExp())) {
 			return new ResponseEntity(new Mensaje("Esa experiencia ya existia!"),HttpStatus.BAD_REQUEST);
 		}
+		if (StringUtils.isBlank(dtoExp.getDescripcionExp())) {
+			return new ResponseEntity(new Mensaje("Descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
+		}
 		
 		ExpLaboral expLab = new ExpLaboral(dtoExp.getNombreExp(),dtoExp.getDescripcionExp(), dtoExp.getImg());
 		
@@ -63,6 +66,9 @@ public class CExpLaboral {
 		}
 		if (StringUtils.isBlank(dtoExp.getNombreExp())) {
 			return new ResponseEntity(new Mensaje("El nombre es obligatorio!"),HttpStatus.BAD_REQUEST);
+		}
+		if (StringUtils.isBlank(dtoExp.getDescripcionExp())) {
+			return new ResponseEntity(new Mensaje("Descripcion es obligatoria!"), HttpStatus.BAD_REQUEST);
 		}
 		ExpLaboral expLab = sExp.getOne(id).get();
 		expLab.setNombreExp(dtoExp.getNombreExp());
